@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { constantRoutes, asyncRoutes } from './routes'
+
 Vue.use(VueRouter)
 const routes = [
   { path: '/home', component: () => import('@/views/home') },
@@ -10,6 +12,7 @@ const routes = [
 export const demos = routes.find(v => v.path === '/demos').children
 
 const router = new VueRouter({
-  routes
+  routes: [...constantRoutes, ...asyncRoutes]
 })
+
 export default router

@@ -22,13 +22,25 @@ module.exports = {
     overlay: {
       warnings: false,
       errors: true
-    },
+    }
   },
   configureWebpack: {
     name: name,
     resolve: {
       alias: {
         '@': resolve('src')
+      }
+    }
+  },
+  css: {
+    loaderOptions: {
+      less: {
+        lessOptions: {
+          modifyVars: {
+            'primary-color': 'red'
+          },
+          javascriptEnabled: true
+        }
       }
     }
   },
