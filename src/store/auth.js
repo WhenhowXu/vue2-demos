@@ -2,6 +2,7 @@ import { getAsycRouters } from '@/api/router'
 import { asyncRoutes } from '@/router/routes'
 
 export default {
+  namespaced: true,
   state: {
     userInfo: null, // 登录用户信息
     token: '',

@@ -4,8 +4,8 @@ import App from './App'
 import VXETable from 'vxe-table'
 import store from '@/store'
 import router from './router'
-import '@/style/index.less'
 import './plugins'
+import '@/style/index.less'
 
 Vue.config.productionTip = false
 Vue.use(VXETable)

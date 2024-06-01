@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '@/store'
 import { constantRoutes, asyncRoutes } from './routes'
 
 Vue.use(VueRouter)
@@ -15,4 +16,12 @@ const router = new VueRouter({
   routes: [...constantRoutes, ...asyncRoutes]
 })
 
+router.beforeEach((to, from, next) => {
+  next()
+})
+
+router.afterEach((to, from) => {
+  console.log(to, from)
+  store.commit('route/setAfterEach', to)
+})
 export default router
