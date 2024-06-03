@@ -2,13 +2,17 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
 import { constantRoutes, asyncRoutes } from './routes'
+import { ACCESS_TOKEN } from '@/constants/storage';
 
 Vue.use(VueRouter)
+
 const routes = [
   { path: '/home', component: () => import('@/views/home') },
-  { path: '/demos', component: () => import('@/views/demos'), children: [
-    { path: '/demos/search-table', component: () => import('@/views/demos/searchTable'), meta: { title: '基础可搜索表格' }}
-  ] }
+  {
+    path: '/demos', component: () => import('@/views/demos'), children: [
+      { path: '/demos/search-table', component: () => import('@/views/demos/searchTable'), meta: { title: '基础可搜索表格' } }
+    ]
+  }
 ]
 export const demos = routes.find(v => v.path === '/demos').children
 
@@ -17,7 +21,20 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  next()
+  const token = localStorage.getItem(ACCESS_TOKEN)
+  if (token) {
+    if (to.path === '/login' || to.path === '/') {
+      next('/dashboard')
+    } else {
+      next()
+    }
+  } else {
+    if (to.path !== '/login') {
+      next('/login')
+    } else {
+      next()
+    }
+  }
 })
 
 router.afterEach((to, from) => {

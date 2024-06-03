@@ -1,15 +1,15 @@
 <template>
   <div class="login-form-wrapper">
-    <h3 class="login-form-title">VUE2 DMEOS</h3>
+    <h3 class="login-form-title">登录</h3>
     <a-form-model v-bind="formItemLayout">
-      <a-form-model-item label="用户名">
-        <a-input v-model="form.name" />
+      <a-form-model-item>
+        <a-input v-model="form.username" size="large" />
       </a-form-model-item>
-      <a-form-model-item label="密码">
-        <a-input-password v-model="form.password" />
+      <a-form-model-item>
+        <a-input-password size="large" v-model="form.password" />
       </a-form-model-item>
-      <a-form-model-item label=" " :colon="false">
-        <a-button type="primary" style="width: 100%">
+      <a-form-model-item>
+        <a-button type="primary" size="large" style="width: 100%" @click="handleSubmit">
           登录
         </a-button>
       </a-form-model-item>
@@ -18,18 +18,28 @@
 </template>
 
 <script>
+import { login } from '@/api/login';
+import { ACCESS_TOKEN, USER_INFO } from '@/constants/storage';
 export default {
   name: 'LoginForm',
   data() {
     return {
       formItemLayout: Object.freeze({
-        labelCol: { span: 5 },
-        wrapperCol: { span: 18 }
+        wrapperCol: { span: 20, offset: 2 }
       }),
       buttonItemLayout: Object.freeze({
         wrapperCol: { span: 14, offset: 5 }
       }),
-      form: { name: 'admin', password: '123456' }
+      form: { username: 'admin', password: '123456' }
+    }
+  },
+  methods: {
+    handleSubmit(){
+      login(this.form).then(data=>{
+        localStorage.setItem(ACCESS_TOKEN, data?.token);
+        localStorage.setItem(USER_INFO, data);
+        this.$router.push('/')
+      })
     }
   }
 }
@@ -47,12 +57,11 @@ export default {
   transform: translateY(-50%);
   right: 15%;
   .login-form-title{
-    background-color: @theme;
     border-radius: 4px 4px 0 0;
-    height: 48px;
+    font-size: 20px;
     line-height: 48px;
-    color: #fff;
-    padding: 0 24px;
+    font-weight: bold;
+    padding: 12px 24px;
   }
 }
 </style>
