@@ -5,7 +5,6 @@ import { constantRoutes, asyncRoutes } from './routes'
 import { ACCESS_TOKEN } from '@/constants/storage';
 
 Vue.use(VueRouter)
-
 const routes = [
   { path: '/home', component: () => import('@/views/home') },
   {
@@ -20,9 +19,13 @@ const router = new VueRouter({
   routes: [...constantRoutes, ...asyncRoutes]
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const token = localStorage.getItem(ACCESS_TOKEN)
   if (token) {
+    if(!store.route?.menusData){
+      const routes = await store.dispatch('route/getMenus');
+      console.log(routes, '------------')
+    }
     if (to.path === '/login' || to.path === '/') {
       next('/dashboard')
     } else {

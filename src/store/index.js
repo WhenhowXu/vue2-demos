@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import auth from './auth'
+import login from './login'
 import route from './route'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
-    auth,
+    login,
     route
   }
 })

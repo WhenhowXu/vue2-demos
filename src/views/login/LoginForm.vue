@@ -18,8 +18,7 @@
 </template>
 
 <script>
-import { login } from '@/api/login';
-import { ACCESS_TOKEN, USER_INFO } from '@/constants/storage';
+import { mapActions } from 'vuex';
 export default {
   name: 'LoginForm',
   data() {
@@ -34,10 +33,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions('login', ['login']),
     handleSubmit(){
-      login(this.form).then(data=>{
-        localStorage.setItem(ACCESS_TOKEN, data?.token);
-        localStorage.setItem(USER_INFO, data);
+      this.login(this.form).then(()=>{
         this.$router.push('/')
       })
     }

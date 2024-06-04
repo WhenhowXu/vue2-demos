@@ -39,7 +39,7 @@ request.interceptors.response.use(response => {
     let { data = {} } = response;
     const { code, message } = data;
     if (code === 0) {
-        return data;
+        return data.data;
     } else if (code === 401) {
         message.error('登录信息已失效，请重新登录！')
         return Promise.reject()

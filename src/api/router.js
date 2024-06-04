@@ -1,3 +1,3 @@
-import { generateApi } from './utils'
-
-export const getAsycRouters = (data) => generateApi(data)
+import axios from '@/utils/request';
+// 获取菜单
+export const getMenus = () => axios.get('/api/menus')
