@@ -7,7 +7,7 @@ import router from './router'
 import './plugins'
 import '@/style/index.less'
 
-require('@/mock');
+require('@/mock')
 
 Vue.config.productionTip = false
 Vue.use(VXETable)

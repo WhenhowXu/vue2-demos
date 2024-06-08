@@ -4,7 +4,9 @@
       <top-header />
     </a-layout-header>
     <a-layout>
-      <a-layout-sider theme="light">Sider</a-layout-sider>
+      <a-layout-sider theme="light">
+        <sidebar-menu />
+      </a-layout-sider>
       <a-layout-content>
         <router-view />
       </a-layout-content>
@@ -13,7 +15,8 @@
 </template>
 <script>
 import TopHeader from './TopHeader.vue'
+import SidebarMenu from './SidebarMenu.vue'
 export default {
-  components: { TopHeader }
+  components: { TopHeader, SidebarMenu }
 }
 </script>

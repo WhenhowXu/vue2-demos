@@ -1,13 +1,13 @@
 <template>
   <div class="header-wrapper">
     <div class="header-top flex-horizontal">
-      <span></span>
+      <span />
       <a-space>
         <a-avatar :size="24" icon="user" />
         <a-dropdown>
           <a-icon type="caret-down" style="color: #fff" />
           <a-menu slot="overlay" @click="onMenuClick">
-            <a-menu-item key="logout"> <a-icon type="poweroff"></a-icon> 退出</a-menu-item>
+            <a-menu-item key="logout"> <a-icon type="poweroff" /> 退出</a-menu-item>
           </a-menu>
         </a-dropdown>
       </a-space>
@@ -15,11 +15,11 @@
     <div class="header-bottom flex-horizontal">
       <h3 class="header-wrapper-left">VUE DEMOS</h3>
       <menu-tabs />
-    </div> 
+    </div>
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from 'vuex'
 import MenuTabs from './MenuTabs.vue'
 
 export default {
@@ -29,18 +29,18 @@ export default {
   },
   methods: {
     ...mapActions('login', ['logout']),
-    onMenuClick(e){
-      switch(e.key){
+    onMenuClick(e) {
+      switch (e.key) {
         case 'logout':
-          this.logout().then(()=>{
+          this.logout().then(() => {
             location.reload()
-          });
-          break;
-        default: 
-          break;
+          })
+          break
+        default:
+          break
       }
     }
-  },
+  }
 }
 </script>
 <style lang="less" scoped>

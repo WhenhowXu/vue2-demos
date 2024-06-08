@@ -14,7 +14,7 @@ const menusTree = [
     title: '首页',
     icon: 'board',
     hideInSide: false,
-    hideInTabs: false,
+    hideInTabs: false
   },
   {
     path: '/demos',
@@ -22,8 +22,8 @@ const menusTree = [
     title: '示例',
     icon: 'user',
     hideInSide: false,
-    hideInTabs: false,
-  },
+    hideInTabs: false
+  }
 ]
 const generateAsyncRoutes = (menusTree) => {
   if (Array.isArray(menusTree) && menusTree.length > 0) {
@@ -37,7 +37,7 @@ const generateAsyncRoutes = (menusTree) => {
     })
   }
 }
-console.log(generateAsyncRoutes(menusTree));
+console.log(generateAsyncRoutes(menusTree))
 export const asyncRoutes = [
   {
     path: '/',

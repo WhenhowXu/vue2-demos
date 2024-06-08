@@ -6,7 +6,7 @@
         <a-input v-model="form.username" size="large" />
       </a-form-model-item>
       <a-form-model-item>
-        <a-input-password size="large" v-model="form.password" />
+        <a-input-password v-model="form.password" size="large" />
       </a-form-model-item>
       <a-form-model-item>
         <a-button type="primary" size="large" style="width: 100%" @click="handleSubmit">
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from 'vuex'
 export default {
   name: 'LoginForm',
   data() {
@@ -34,8 +34,8 @@ export default {
   },
   methods: {
     ...mapActions('login', ['login']),
-    handleSubmit(){
-      this.login(this.form).then(()=>{
+    handleSubmit() {
+      this.login(this.form).then(() => {
         this.$router.push('/')
       })
     }

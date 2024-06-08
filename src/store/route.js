@@ -1,4 +1,4 @@
-import { getMenus } from '@/api/router';
+import { getMenus } from '@/api/router'
 
 export default {
   namespaced: true,
@@ -22,9 +22,9 @@ export default {
     }
   },
   actions: {
-    async getMenus({ commit }){
-      const data = await getMenus();
-      console.log(data);
+    async getMenus({ commit }) {
+      const data = await getMenus()
+      console.log(data)
     }
   }
 }
