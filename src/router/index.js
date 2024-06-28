@@ -22,10 +22,6 @@ const router = new VueRouter({
 router.beforeEach(async(to, from, next) => {
   const token = localStorage.getItem(ACCESS_TOKEN)
   if (token) {
-    if (!store.route?.menusData) {
-      const routes = await store.dispatch('route/getMenus')
-      console.log(routes, '------------')
-    }
     if (to.path === '/login' || to.path === '/') {
       next('/dashboard')
     } else {
@@ -41,7 +37,6 @@ router.beforeEach(async(to, from, next) => {
 })
 
 router.afterEach((to, from) => {
-  console.log(to, from)
   store.commit('route/setAfterEach', to)
 })
 export default router

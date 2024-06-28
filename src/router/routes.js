@@ -7,6 +7,17 @@ export const constantRoutes = [
   { path: '/login', component: () => import('@/views/login') }
 ]
 
+/** 
+ * 菜单配置
+ * name 组件名称 keep-alive 缓存标识
+ * title 菜单名称
+ * path 跳转路径
+ * template 模版
+ * icon 图标
+ * hideInMenu {boolean}: 是否在菜单栏中显示 
+ * isExternal {boolean}: 是否为外部链接
+ * children: 子菜单
+ * */
 const menusTree = [
   {
     path: '/dashboard',
@@ -14,7 +25,8 @@ const menusTree = [
     title: '首页',
     icon: 'board',
     hideInSide: false,
-    hideInTabs: false
+    name: 'HomePage', // 缓存组件名称
+    cache: true, // 页面是否缓存
   },
   {
     path: '/demos',
@@ -22,26 +34,44 @@ const menusTree = [
     title: '示例',
     icon: 'user',
     hideInSide: false,
-    hideInTabs: false
   }
 ]
-const generateAsyncRoutes = (menusTree) => {
-  if (Array.isArray(menusTree) && menusTree.length > 0) {
-    return menusTree.map(m => {
-      return {
-        path: m.path,
-        component: lazyLoad(m.template),
-        meta: { title: m.title, icon: m.icon },
-        children: m.children ? generateAsyncRoutes(m.children) : []
-      }
-    })
-  }
+/**
+ * 生成动态路由
+ *
+ * @param menusTree 菜单树数组
+ * @returns 返回路由数组
+ */
+
+export const generateAddRoutes = (menusTree) => {
+  return menusTree.map(m => (
+    {
+      name: m.name,
+      path: m.path,
+      component: m.isExternal ? null : lazyLoad(m.template),
+      meta: { title: m.title, icon: m.icon },
+      children: m.children?.length ? generateAddRoutes(m.children) : null
+    }
+  ))
 }
-console.log(generateAsyncRoutes(menusTree))
+
+export const ADD_ROUTES = generateAddRoutes(menusTree);
+
+// 生成侧标栏菜单
+const generateSideMenus = (menusTree) => {
+  return menusTree.filter(m => !m.hideInSide).map(m => ({
+    title: m.title,
+    path: m.path,
+    icon: m.icon,
+    children: m.children ? generateSideMenus(m.children) : null
+  }))
+};
+export const SIDE_MENUS = generateSideMenus(menusTree);
+
 export const asyncRoutes = [
   {
     path: '/',
     component: Layout,
-    children: generateAsyncRoutes(menusTree)
+    children: ADD_ROUTES
   }
 ]

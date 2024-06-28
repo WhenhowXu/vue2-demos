@@ -8,8 +8,6 @@ function resolve(dir) {
 
 const name = defaultSettings.title || 'Vue2 Demos' // page title
 
-const port = process.env.port || process.env.npm_config_port || 9528 // dev port
-
 module.exports = {
   publicPath: '/',
   outputDir: 'dist',
@@ -17,12 +15,7 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
-    port: port,
     open: true,
-    overlay: {
-      warnings: false,
-      errors: true
-    }
   },
   configureWebpack: {
     name: name,
@@ -81,7 +74,7 @@ module.exports = {
             .plugin('ScriptExtHtmlWebpackPlugin')
             .after('html')
             .use('script-ext-html-webpack-plugin', [{
-            // `runtime` must same as runtimeChunk name. default is `runtime`
+              // `runtime` must same as runtimeChunk name. default is `runtime`
               inline: /runtime\..*\.js$/
             }])
             .end()
@@ -112,5 +105,6 @@ module.exports = {
           config.optimization.runtimeChunk('single')
         }
       )
-  }
+  },
+  transpileDependencies: ['sock-js', 'sockjs-client']
 }

@@ -9,15 +9,21 @@ export default {
     includeNames: [], // keep-alive 需缓存的页面
     excludeNames: [] // keep-alive 不缓存的页面
   },
-  getters: {},
+  getters: {
+    cacheViews() {
+      return [...new Set(state.menuTabs.filter(m => m.cache && m.name).map(m => m.name))]
+    }
+  },
   mutations: {
     setAfterEach(state, to = {}) {
       if (state.menuTabs.find(m => m.fullPath === to.fullPath)) return
       state.menuTabs.push({
         title: to.meta?.title,
         path: to.path,
+        cache: to.meta?.cache,
         fullPath: to.fullPath,
-        name: ''
+        name: to.name,
+        meta: to.meta
       })
     }
   },
