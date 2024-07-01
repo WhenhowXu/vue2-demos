@@ -13,7 +13,7 @@
       </a-space>
     </div>
     <div class="header-bottom flex-horizontal">
-      <h3 class="header-wrapper-left">VUE DEMOS</h3>
+      <h3 class="header-wrapper-left">{{ title }}</h3>
       <menu-tabs />
     </div>
   </div>
@@ -21,11 +21,17 @@
 <script>
 import { mapActions } from 'vuex'
 import MenuTabs from './MenuTabs.vue'
+import defaultSettings from '@/settings'
 
 export default {
   name: 'TopHeader',
   components: {
     MenuTabs
+  },
+  data() {
+    return {
+      title: defaultSettings.title.toUpperCase()
+    }
   },
   methods: {
     ...mapActions('login', ['logout']),

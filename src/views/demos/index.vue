@@ -1,11 +1,5 @@
 <template>
-  <div class="demos-container">
-    <header class="demos-header">
-      <span class="demos-title">{{ title }}</span>
-      <vxe-button type="primary" @click="toBack">返回</vxe-button>
-    </header>
-    <router-view />
-  </div>
+  <div class="demos-container">DEMOS</div>
 </template>
 <script>
 export default {
@@ -27,7 +21,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  .demos-title{
+  .demos-title {
     font-weight: bold;
   }
 }

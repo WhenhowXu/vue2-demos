@@ -5,7 +5,7 @@
     </a-layout-header>
     <a-layout>
       <a-layout-sider theme="light">
-        <sidebar-menu :menuTreeData="menuTreeData" />
+        <sidebar-menu :menu-tree-data="menuTreeData" />
       </a-layout-sider>
       <a-layout-content>
         <keep-alive :include="cacheViews">
@@ -16,19 +16,19 @@
   </a-layout>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import { SIDE_MENUS } from "@/router/routes";
-import TopHeader from "./TopHeader.vue";
-import SidebarMenu from "./SidebarMenu.vue";
+import { mapGetters } from 'vuex'
+import { SIDE_MENUS } from '@/router/routes'
+import TopHeader from './TopHeader.vue'
+import SidebarMenu from './SidebarMenu.vue'
 export default {
   components: { TopHeader, SidebarMenu },
   data() {
     return {
-      menuTreeData: SIDE_MENUS,
-    };
+      menuTreeData: SIDE_MENUS
+    }
   },
   computed: {
-    ...mapGetters("route", ["cacheViews"]),
-  },
-};
+    ...mapGetters('route', ['cacheViews'])
+  }
+}
 </script>

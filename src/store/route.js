@@ -5,17 +5,16 @@ export default {
   state: {
     menuTabs: [], // 顶部页面tabs
     menusData: null,
-    sideMenuTree: [], // 侧边栏
-    includeNames: [], // keep-alive 需缓存的页面
-    excludeNames: [] // keep-alive 不缓存的页面
+    sideMenuTree: [] // 侧边栏
   },
   getters: {
-    cacheViews() {
+    cacheViews(state) {
       return [...new Set(state.menuTabs.filter(m => m.cache && m.name).map(m => m.name))]
     }
   },
   mutations: {
     setAfterEach(state, to = {}) {
+      if (!to.meta.title || to.meta.hideInSide) return
       if (state.menuTabs.find(m => m.fullPath === to.fullPath)) return
       state.menuTabs.push({
         title: to.meta?.title,

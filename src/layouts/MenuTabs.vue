@@ -1,5 +1,5 @@
 <template>
-  <a-tabs :value="activeTabKey" type="editable-card" size="small" hide-add class="layout-top-tabs">
+  <a-tabs :active-key="activeTabKey" type="editable-card" size="small" hide-add class="layout-top-tabs">
     <a-tab-pane v-for="m in menuTabs" :key="m.fullPath">
       <template slot="tab">{{ m.title }}</template>
     </a-tab-pane>

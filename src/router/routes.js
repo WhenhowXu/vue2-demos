@@ -4,18 +4,19 @@ const lazyLoad = (template) => {
 }
 
 export const constantRoutes = [
-  { path: '/login', component: () => import('@/views/login') }
+  { path: '/login', component: () => import('@/views/login'), meta: { hideInSide: true }}
 ]
 
-/** 
+/**
  * 菜单配置
- * name 组件名称 keep-alive 缓存标识
  * title 菜单名称
  * path 跳转路径
  * template 模版
  * icon 图标
- * hideInMenu {boolean}: 是否在菜单栏中显示 
+ * hideInMenu {boolean}: 是否在菜单栏中显示
  * isExternal {boolean}: 是否为外部链接
+ * name 组件名称 keep-alive 缓存标识
+ * cache {boolean}: 页面是否缓存
  * children: 子菜单
  * */
 const menusTree = [
@@ -26,14 +27,13 @@ const menusTree = [
     icon: 'board',
     hideInSide: false,
     name: 'HomePage', // 缓存组件名称
-    cache: true, // 页面是否缓存
+    cache: true // 页面是否缓存
   },
   {
     path: '/demos',
-    template: 'dashboard/index',
-    title: '示例',
-    icon: 'user',
-    hideInSide: false,
+    template: 'demos/index',
+    title: 'VxeTable示例',
+    icon: 'user'
   }
 ]
 /**
@@ -55,7 +55,7 @@ export const generateAddRoutes = (menusTree) => {
   ))
 }
 
-export const ADD_ROUTES = generateAddRoutes(menusTree);
+export const ADD_ROUTES = generateAddRoutes(menusTree)
 
 // 生成侧标栏菜单
 const generateSideMenus = (menusTree) => {
@@ -65,9 +65,9 @@ const generateSideMenus = (menusTree) => {
     icon: m.icon,
     children: m.children ? generateSideMenus(m.children) : null
   }))
-};
-export const SIDE_MENUS = generateSideMenus(menusTree);
-
+}
+export const SIDE_MENUS = generateSideMenus(menusTree)
+console.log(SIDE_MENUS, '-----------SIDE_MENUS')
 export const asyncRoutes = [
   {
     path: '/',
