@@ -1,20 +1,37 @@
 <template>
-  <a-tabs :active-key="activeTabKey" type="editable-card" size="small" hide-add class="layout-top-tabs">
-    <a-tab-pane v-for="m in menuTabs" :key="m.fullPath">
+  <a-tabs 
+    :active-key="activeTabKey" 
+    type="editable-card" 
+    size="small" 
+    hide-add 
+    class="layout-top-tabs"
+    @edit="onEditTab"
+  >
+    <a-tab-pane v-for="m in menuTags" :key="m.fullPath">
       <template slot="tab">{{ m.title }}</template>
     </a-tab-pane>
   </a-tabs>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'MenuTabs',
   computed: {
-    ...mapState('route', ['menuTabs']),
+    ...mapState('route', ['menuTags']),
     activeTabKey() {
       return this.$route.fullPath
     }
-  }
+  },
+  methods: {
+    ...mapActions('route', ['']),
+    onEditTab({ targetKey, action }){
+      if(this.menuTags.length === 1 && action === 'remove'){
+        this.$message.info('这是最后一页，不能再关闭了！')
+        return
+      }
+
+    }
+  },
 }
 </script>
 <style lang="less" scoped>

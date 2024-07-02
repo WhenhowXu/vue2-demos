@@ -11,7 +11,7 @@
     >
       <template v-for="item in menuTreeData">
         <a-menu-item v-if="!item.children" :key="item.path">
-          <a-icon type="pie-chart" />
+          <a-icon v-if="item.icon" :type="item.icon" />
           <span>{{ item.title }}</span>
         </a-menu-item>
         <sub-menu v-else :key="item.path" :menu-info="item" />
@@ -30,7 +30,7 @@ const SubMenu = {
         </span>
         <template v-for="item in menuInfo.children">
           <a-menu-item v-if="!item.children" :key="item.path">
-            <a-icon type="pie-chart" />
+            <a-icon v-if="item.icon" :type="item.icon" />
             <span>{{ item.title }}</span>
           </a-menu-item>
           <sub-menu v-else :key="item.path" :menu-info="item" />

@@ -1,10 +1,13 @@
 import Layout from '@/layouts'
 const lazyLoad = (template) => {
+  if (template === 'layout') {
+    return Layout
+  }
   return (resolve) => require([`@/views/${template}.vue`], resolve)
 }
 
 export const constantRoutes = [
-  { path: '/login', component: () => import('@/views/login'), meta: { hideInSide: true }}
+  { path: '/login', component: () => import('@/views/login'), meta: { hideInMenu: true }}
 ]
 
 /**
@@ -21,19 +24,42 @@ export const constantRoutes = [
  * */
 const menusTree = [
   {
-    path: '/dashboard',
-    template: 'dashboard/index',
+    path: '/',
+    template: 'layout',
     title: '首页',
-    icon: 'board',
-    hideInSide: false,
-    name: 'HomePage', // 缓存组件名称
-    cache: true // 页面是否缓存
+    children: [
+      {
+        path: '/dashboard',
+        template: 'dashboard/index',
+        title: '首页',
+        icon: 'dashboard',
+        name: 'dashboard',
+        cache: true
+      }
+    ]
   },
   {
-    path: '/demos',
-    template: 'demos/index',
-    title: 'VxeTable示例',
-    icon: 'user'
+    path: '/vueBasic',
+    template: 'layout',
+    title: 'Vue基础',
+    children: [
+      {
+        path: '/vueBasic/list',
+        template: 'basic/index',
+        title: 'Vue基础',
+        icon: 'user',
+        name: 'VueBasicList',
+        cache: true
+      },
+      {
+        path: '/vueBasic/detail',
+        template: 'basic/basicDetail',
+        title: '详情',
+        name: 'VueBasicDetail',
+        hideInMenu: true,
+        cache: true
+      }
+    ]
   }
 ]
 /**
@@ -43,14 +69,14 @@ const menusTree = [
  * @returns 返回路由数组
  */
 
-export const generateAddRoutes = (menusTree) => {
+export const generateAddRoutes = (menusTree, level = 1) => {
   return menusTree.map(m => (
     {
       name: m.name,
       path: m.path,
       component: m.isExternal ? null : lazyLoad(m.template),
       meta: { title: m.title, icon: m.icon },
-      children: m.children?.length ? generateAddRoutes(m.children) : null
+      children: m.children?.length ? generateAddRoutes(m.children, level + 1) : null
     }
   ))
 }
@@ -59,19 +85,18 @@ export const ADD_ROUTES = generateAddRoutes(menusTree)
 
 // 生成侧标栏菜单
 const generateSideMenus = (menusTree) => {
-  return menusTree.filter(m => !m.hideInSide).map(m => ({
-    title: m.title,
-    path: m.path,
-    icon: m.icon,
-    children: m.children ? generateSideMenus(m.children) : null
-  }))
+  return menusTree.filter(m => !m.hideInMenu).map(m => {
+    const obj = {
+      title: m.title,
+      path: m.path,
+      icon: m.icon,
+      children: m.children ? generateSideMenus(m.children) : null
+    }
+    if (obj.children?.length === 1) {
+      return obj.children[0]
+    }
+    return obj
+  })
 }
 export const SIDE_MENUS = generateSideMenus(menusTree)
-console.log(SIDE_MENUS, '-----------SIDE_MENUS')
-export const asyncRoutes = [
-  {
-    path: '/',
-    component: Layout,
-    children: ADD_ROUTES
-  }
-]
+export const asyncRoutes = ADD_ROUTES
