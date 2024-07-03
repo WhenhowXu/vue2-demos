@@ -6,8 +6,10 @@ import router from './router'
 import './plugins'
 import '@/style/index.less'
 
-require('@/mock')
-
+if (process.env.NODE_ENV === 'production') {
+  const { mockXHR } = require('../mock')
+  mockXHR()
+}
 Vue.config.productionTip = false
 
 new Vue({

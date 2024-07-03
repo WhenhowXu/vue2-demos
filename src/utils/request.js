@@ -7,7 +7,7 @@ const logout = function() {
   window.location.reload()
 }
 const request = axios.create({
-  baseURL: '/',
+  baseURL: process.env.VUE_APP_BASE_API,
   timeout: 60000
 })
 // 异常拦截处理器

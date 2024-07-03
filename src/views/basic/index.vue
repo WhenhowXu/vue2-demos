@@ -11,15 +11,20 @@
         </template>
       </BasicListTree>
     </div>
-    <div class="content-section" />
+    <div class="content-section" >
+      <component :is="activeRow.component"/>
+    </div>
+
   </div>
 </template>
 <script>
 import BasicListTree from './BasicListTree.vue'
+import * as BasicDemos from './demos'
 import { demos } from './config'
+
 export default {
   name: 'BasicList',
-  components: { BasicListTree },
+  components: { BasicListTree, ...BasicDemos },
   data() {
     return {
       demos,
@@ -40,7 +45,8 @@ export default {
   }
   .content-section {
     flex: 1;
-    background-color: lightgreen;
+    background-color: #fff;
+    border-radius: 4px;
   }
 }
 </style>

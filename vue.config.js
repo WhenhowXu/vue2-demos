@@ -7,6 +7,7 @@ function resolve(dir) {
 }
 
 const name = defaultSettings.title || 'Vue2 Demos' // page title
+const port = process.env.port || process.env.npm_config_port || 9528 // dev port
 
 module.exports = {
   publicPath: '/',
@@ -16,8 +17,9 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     open: true,
-    port: 9000,
-    hot: true
+    port,
+    hot: true,
+    before: require('./mock/mock-server.js')
   },
   configureWebpack: {
     name: name,

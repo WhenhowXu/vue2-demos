@@ -60,6 +60,29 @@ const menusTree = [
         cache: true
       }
     ]
+  },
+  {
+    path: '/vxeTable',
+    template: 'layout',
+    title: 'Vue基础',
+    children: [
+      {
+        path: '/vxeTable/list',
+        template: 'vxeTable/index',
+        title: 'VxeTable基础',
+        icon: 'table',
+        name: 'VxeTableDemos',
+        cache: true
+      },
+      {
+        path: '/vxeTable/detail',
+        template: 'basic/basicDetail',
+        title: '详情',
+        name: 'VueBasicDetail',
+        hideInMenu: true,
+        cache: true
+      }
+    ]
   }
 ]
 /**
