@@ -16,6 +16,7 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     open: true,
+    port: 9000,
     hot: true
   },
   configureWebpack: {

@@ -23,6 +23,7 @@
 
 <script>
 import LoginForm from './LoginForm.vue'
+
 export default {
   name: 'Login',
   components: { LoginForm }

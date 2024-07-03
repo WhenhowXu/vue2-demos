@@ -1,14 +1,27 @@
 <template>
-  <a-tabs 
-    :active-key="activeTabKey" 
-    type="editable-card" 
-    size="small" 
-    hide-add 
+  <a-tabs
+    :active-key="activeTabKey"
+    type="editable-card"
+    size="small"
+    hide-add
     class="layout-top-tabs"
     @edit="onEditTab"
+    @change="switchCurrentPage"
   >
     <a-tab-pane v-for="m in menuTags" :key="m.fullPath">
-      <template slot="tab">{{ m.title }}</template>
+      <a-dropdown slot="tab" :trigger="['contextmenu']">
+        <span>
+          {{ m.title }}
+        </span>
+        <template #overlay>
+          <a-menu @click="onClickMenu($event, m)">
+            <a-menu-item v-for="item in closeActions" :key="item.key">
+              {{ item.name }}
+              <a-icon :type="item.icon" />
+            </a-menu-item>
+          </a-menu>
+        </template>
+      </a-dropdown>
     </a-tab-pane>
   </a-tabs>
 </template>
@@ -16,6 +29,15 @@
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'MenuTabs',
+  data() {
+    return {
+      closeActions: [
+        { name: '关闭左侧页面', key: 'closeLeft', icon: 'left' },
+        { name: '关闭右侧页面', key: 'closeRight', icon: 'right' },
+        { name: '关闭其它页面', key: 'closeOther', icon: 'close' }
+      ]
+    }
+  },
   computed: {
     ...mapState('route', ['menuTags']),
     activeTabKey() {
@@ -23,19 +45,27 @@ export default {
     }
   },
   methods: {
-    ...mapActions('route', ['']),
-    onEditTab({ targetKey, action }){
-      if(this.menuTags.length === 1 && action === 'remove'){
-        this.$message.info('这是最后一页，不能再关闭了！')
-        return
-      }
+    ...mapActions('route', [
+      'switchCurrentPage',
+      'closePage',
+      'closeSomePages'
+    ]),
 
+    onEditTab(fullPath, action) {
+      action === 'remove' &&
+        this.closePage({ fullPath }).catch((errorMessage) => {
+          this.$message.info(errorMessage)
+        })
+    },
+
+    onClickMenu(e, item) {
+      this.closeSomePages({ type: e.key, fullPath: item.fullPath })
     }
-  },
+  }
 }
 </script>
 <style lang="less" scoped>
-.layout-top-tabs{
+.layout-top-tabs {
   align-self: end;
 }
 
@@ -75,8 +105,8 @@ export default {
     }
   }
 }
-.layout-top-tabs{
-  /deep/ .ant-tabs-bar.ant-tabs-top-bar.ant-tabs-card-bar{
+.layout-top-tabs {
+  /deep/ .ant-tabs-bar.ant-tabs-top-bar.ant-tabs-card-bar {
     margin-bottom: 0;
   }
 }
