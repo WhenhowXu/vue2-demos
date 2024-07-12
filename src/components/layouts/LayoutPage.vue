@@ -14,44 +14,44 @@
 </template>
 <script>
 const getPadding = (padding) =>
-  typeof padding === "number" ? `${padding}px` : padding;
+  typeof padding === 'number' ? `${padding}px` : padding
 export default {
-  name: "LayoutPage",
+  name: 'LayoutPage',
   props: {
     padding: { type: Number | String, default: 12 },
     mainPadding: { type: Number | String, default: 12 },
-    gutter: { type: Number | Array, default: 12 }, // header、main、footer之间的间隙距离
+    gutter: { type: Number | Array, default: 12 } // header、main、footer之间的间隙距离
   },
   computed: {
     _padding() {
-      return getPadding(this.padding);
+      return getPadding(this.padding)
     },
     _mainPadding() {
-      return getPadding(this.mainPadding);
+      return getPadding(this.mainPadding)
     },
     hasHeader() {
-      return !!this.$slots.header;
+      return !!this.$slots.header
     },
     headerStyle() {
       // header和main之间间隙距离
       const headerGutter = Array.isArray(this.gutter)
-          ? this.gutter[0]
-          : this.gutter,
-        hasHeader = this.$slots.header;
+        ? this.gutter[0]
+        : this.gutter
+      const hasHeader = this.$slots.header
       return {
-        marginBottom: `${hasHeader ? headerGutter : 0}px`,
-      };
+        marginBottom: `${hasHeader ? headerGutter : 0}px`
+      }
     },
     footerStyle() {
       // footer和main之间间隙距离
       const footerGutter = Array.isArray(this.gutter)
-          ? this.gutter[1]
-          : this.gutter,
-        hasFooter = this.$slots.footer;
-      return { marginTop: `${hasFooter ? footerGutter : 0}px` };
-    },
-  },
-};
+        ? this.gutter[1]
+        : this.gutter
+      const hasFooter = this.$slots.footer
+      return { marginTop: `${hasFooter ? footerGutter : 0}px` }
+    }
+  }
+}
 </script>
 
 <style scoped lang="less">

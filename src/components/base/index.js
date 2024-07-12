@@ -1,6 +1,6 @@
-import BaseTree from './base-tree';
+import BaseTree from './base-tree'
 
-const components = [BaseTree];
+const components = [BaseTree]
 const BaseComponents = {
   BaseTree,
   install(App) {
