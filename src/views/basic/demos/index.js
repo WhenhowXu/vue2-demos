@@ -1,4 +1,4 @@
-import MultipleModel from './MultipleModel';
+import MultipleModel from './MultipleModel'
 
 export {
   MultipleModel

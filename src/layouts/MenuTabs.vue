@@ -10,9 +10,7 @@
   >
     <a-tab-pane v-for="m in menuTags" :key="m.fullPath">
       <a-dropdown slot="tab" :trigger="['contextmenu']">
-        <span>
-          {{ m.title }}
-        </span>
+        <span>{{ m.title }}</span>
         <template #overlay>
           <a-menu @click="onClickMenu($event, m)">
             <a-menu-item v-for="item in closeActions" :key="item.key">

@@ -11,8 +11,8 @@
         </template>
       </BasicListTree>
     </div>
-    <div class="content-section" >
-      <component :is="activeRow.component"/>
+    <div class="content-section">
+      <component :is="activeRow.component" />
     </div>
 
   </div>

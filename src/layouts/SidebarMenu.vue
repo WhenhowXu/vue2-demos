@@ -14,7 +14,7 @@
           <a-icon v-if="item.icon" :type="item.icon" />
           <span>{{ item.title }}</span>
         </a-menu-item>
-        <sub-menu v-else :key="item.path" :menu-info="item" />
+        <sub-menu v-else :key="`${item.path}-SUB`" :menu-info="item" />
       </template>
     </a-menu>
   </div>

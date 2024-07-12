@@ -76,9 +76,9 @@ const menusTree = [
       },
       {
         path: '/vxeTable/detail',
-        template: 'basic/basicDetail',
+        template: 'vxeTable/detail',
         title: '详情',
-        name: 'VueBasicDetail',
+        name: 'VXETableDetail',
         hideInMenu: true,
         cache: true
       }
