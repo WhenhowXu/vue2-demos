@@ -1,4 +1,5 @@
 import 'vxe-table/lib/style.css'
+import '@/components/base/styles/index.scss'
 import Vue from 'vue'
 import App from './App'
 import store from '@/store'

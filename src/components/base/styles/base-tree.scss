@@ -1,0 +1,16 @@
+.base-tree-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  .base-tree-table {
+    flex: 1;
+    overflow: hidden;
+  }
+  .base-tree-header{
+    margin-bottom: 12px;
+    .vxe-input{
+      width: 100%;
+    }
+  }
+}
