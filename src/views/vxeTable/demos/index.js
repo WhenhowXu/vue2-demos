@@ -1,3 +1,5 @@
 import ConfiguredTable from './ConfiguredTable'
 import VirtualTree from './VirtualTree'
-export default { ConfiguredTable, VirtualTree }
+import VirtualTreeSelect from './VirtualTreeSelect'
+
+export default { ConfiguredTable, VirtualTree, VirtualTreeSelect }

@@ -2,7 +2,8 @@ const MockJS = require('mockjs')
 const vxeDemos = [
   { id: 1, name: '配置化表格', describe: '使用Vxe Table中的Gird组件实现配置化表格', template: 'ConfiguredTable' },
   { id: 2, name: '虚拟化树', describe: '使用Vxe Table中的Table组件实现大数据树组件', template: 'VirtualTree' },
-  { id: 3, name: '虚拟化下拉', describe: '', template: '' }
+  { id: 3, name: '虚拟化树选择', describe: '使用Vxe Table中的Table组件实现大数据树选择组件', template: 'VirtualTreeSelect' },
+  { id: 4, name: '虚拟化下拉', describe: '', template: '' }
 ]
 // 配置化表格
 const configuredData = MockJS.mock({
@@ -18,6 +19,11 @@ const configuredData = MockJS.mock({
     }
   ]
 })
+
+// ant-design-vue 示例
+const antDesignDemos = [
+  { id: 1, name: '配置化表单', describe: 'Ant Design Vue实现配置化表单组件', template: 'ConfiguredFormDemo' },
+]
 module.exports = [
   {
     url: '/vxeTable/demos',
@@ -26,6 +32,16 @@ module.exports = [
       return {
         code: 0,
         data: vxeDemos
+      }
+    }
+  },
+  {
+    url: '/antDesign/demos',
+    type: 'post',
+    response: config => {
+      return {
+        code: 0,
+        data: antDesignDemos
       }
     }
   },

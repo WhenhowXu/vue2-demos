@@ -69,7 +69,7 @@ const menusTree = [
       {
         path: '/vxeTable/list',
         template: 'vxeTable/index',
-        title: 'VxeTable基础',
+        title: 'VxeTable示例',
         icon: 'table',
         name: 'VxeTableDemos',
         cache: true
@@ -79,6 +79,29 @@ const menusTree = [
         template: 'vxeTable/detail',
         title: '详情',
         name: 'VXETableDetail',
+        hideInMenu: true,
+        cache: true
+      }
+    ]
+  },
+  {
+    path: '/antDemos',
+    template: 'layout',
+    title: 'Vue基础',
+    children: [
+      {
+        path: '/antDemos/list',
+        template: 'antDemos/index',
+        title: 'Ant Design Vue示例',
+        icon: 'table',
+        name: 'AntDemos',
+        cache: true
+      },
+      {
+        path: '/antDemos/detail',
+        template: 'antDemos/detail',
+        title: '详情',
+        name: 'AntDemosDetail',
         hideInMenu: true,
         cache: true
       }
