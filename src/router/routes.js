@@ -26,7 +26,7 @@ const menusTree = [
   {
     path: '/',
     template: 'layout',
-    title: '首页',
+    title: '仪表板',
     children: [
       {
         path: '/dashboard',
@@ -34,6 +34,26 @@ const menusTree = [
         title: '首页',
         icon: 'dashboard',
         name: 'dashboard',
+        cache: true
+      }
+    ]
+  },
+  {
+    path: '/tool',
+    template: 'layout',
+    title: '插件',
+    children: [
+      { path: '', redirect: '/tool/monaco-editor' },
+      {
+        path: '/tool/monaco-editor',
+        template: 'tools/monaco-editor/index',
+        title: '代码编辑器',
+        cache: true
+      },
+      {
+        path: '/tool/schedule',
+        template: 'tools/schedule/index',
+        title: '日程',
         cache: true
       }
     ]
@@ -131,7 +151,7 @@ export const ADD_ROUTES = generateAddRoutes(menusTree)
 
 // 生成侧标栏菜单
 const generateSideMenus = (menusTree) => {
-  return menusTree.filter(m => !m.hideInMenu).map(m => {
+  return menusTree.filter(m => !m.hideInMenu && m.title).map(m => {
     const obj = {
       title: m.title,
       path: m.path,
@@ -145,4 +165,5 @@ const generateSideMenus = (menusTree) => {
   })
 }
 export const SIDE_MENUS = generateSideMenus(menusTree)
+console.log('SIDE_MENUS', SIDE_MENUS)
 export const asyncRoutes = ADD_ROUTES

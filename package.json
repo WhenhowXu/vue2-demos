@@ -15,6 +15,11 @@
     "url": "git+https://github.com/WhenhowXu/vue2-demos.git"
   },
   "dependencies": {
+    "@fullcalendar/core": "^6.1.10",
+    "@fullcalendar/daygrid": "^6.1.10",
+    "@fullcalendar/interaction": "^6.1.10",
+    "@fullcalendar/timegrid": "^6.1.10",
+    "@fullcalendar/vue": "^6.1.10",
     "ant-design-vue": "^1.7.8",
     "axios": "0.18.1",
     "core-js": "3.6.5",
@@ -24,7 +29,8 @@
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",
-    "vue": "2.6.10",
+    "vue": "^2.6.12",
+    "vue-monaco-editor": "^0.0.19",
     "vue-particles": "^1.0.9",
     "vue-router": "3.0.6",
     "vuex": "3.1.0",
