@@ -18,6 +18,8 @@
     "@fullcalendar/core": "^6.1.10",
     "@fullcalendar/daygrid": "^6.1.10",
     "@fullcalendar/interaction": "^6.1.10",
+    "@fullcalendar/multimonth": "^6.1.15",
+    "@fullcalendar/resource-daygrid": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.10",
     "@fullcalendar/vue": "^6.1.10",
     "ant-design-vue": "^1.7.8",
