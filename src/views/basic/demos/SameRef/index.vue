@@ -55,7 +55,7 @@ export default {
       list5: Array.from({ length: 5 }).map((v, index) => `5-${index + 1}`),
       list6: Array.from({ length: 5 }).map((v, index) => `6-${index + 1}`),
       columns,
-      dataSource: Array.from({ length: 30 }).map((v, index)=> ({
+      dataSource: Array.from({ length: 30 }).map((v, index) => ({
         c1: 'hhhhhh' + index
       }))
     }

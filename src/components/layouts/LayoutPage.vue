@@ -18,9 +18,9 @@ const getPadding = (padding) =>
 export default {
   name: 'LayoutPage',
   props: {
-    padding: { type: Number | String, default: 12 },
-    mainPadding: { type: Number | String, default: 12 },
-    gutter: { type: Number | Array, default: 12 } // header、main、footer之间的间隙距离
+    padding: { type: [Number, String], default: 12 },
+    mainPadding: { type: [Number, String], default: 12 },
+    gutter: { type: [Number, String], default: 12 } // header、main、footer之间的间隙距离
   },
   computed: {
     _padding() {

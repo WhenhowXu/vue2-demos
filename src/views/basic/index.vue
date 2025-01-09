@@ -1,34 +1,20 @@
 <template>
-  <div class="page-container basic-list-page">
-    <div class="left-section">
-      <BasicListTree v-model="activeRow" :tree-data="demos" show-search>
-        <template #actions="{ row }">
-          <i
-            v-if="row.type === 'file'"
-            class="vxe-icon-feedback"
-            @click="activeRow = row"
-          />
-        </template>
-      </BasicListTree>
-    </div>
-    <div class="content-section">
-      <component :is="activeRow.component" />
-    </div>
-
-  </div>
+  <DemoSidebarContainer v-model="activeDemo" :demos="demos">
+    <component :is="activeDemo" />
+  </DemoSidebarContainer>
 </template>
 <script>
-import BasicListTree from './BasicListTree.vue'
+import DemoSidebarContainer from '@/components/DemoSidebarContainer'
 import * as BasicDemos from './demos'
 import { demos } from './config'
 
 export default {
   name: 'BasicList',
-  components: { BasicListTree, ...BasicDemos },
+  components: { DemoSidebarContainer, ...BasicDemos },
   data() {
     return {
       demos,
-      activeRow: demos.find((v) => v.type === 'file')
+      activeDemo: ''
     }
   }
 }

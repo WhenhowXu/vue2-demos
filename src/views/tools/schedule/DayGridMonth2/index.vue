@@ -25,6 +25,10 @@ export default {
           interactionPlugin // needed for dateClick
         ],
         locale: 'zh-cn',
+        dayCellContent: this.renderDayCellContent,
+        handleCustomRendering: ({ el }) => {
+          el.style.backgroundColor = 'yellow'
+        },
         views: {
           dayGridMonth: {
             type: 'dayGrid',
@@ -74,6 +78,17 @@ export default {
     }
   },
   methods: {
+    renderDayCellContent(args) {
+      const dateCell = document.createElement('div')
+      dateCell.innerHTML = args.date.getDate()
+      // 你可以在这里添加更多的自定义样式或逻辑
+      // 例如，根据日期的特定条件改变背景色或添加其他装饰
+      // if (args.date.isToday) {      // }
+      dateCell.style.backgroundColor = 'red'
+      return {
+        domNodes: [dateCell]
+      }
+    },
     handleWeekendsToggle() {
       this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
     },

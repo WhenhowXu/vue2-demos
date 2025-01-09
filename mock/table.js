@@ -22,7 +22,7 @@ const configuredData = MockJS.mock({
 
 // ant-design-vue 示例
 const antDesignDemos = [
-  { id: 1, name: '配置化表单', describe: 'Ant Design Vue实现配置化表单组件', template: 'ConfiguredFormDemo' },
+  { id: 1, name: '配置化表单', describe: 'Ant Design Vue实现配置化表单组件', template: 'ConfiguredFormDemo' }
 ]
 module.exports = [
   {

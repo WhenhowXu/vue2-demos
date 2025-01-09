@@ -1,6 +1,10 @@
 export const demos = [
-  { id: 'model', type: 'folder', name: 'model', describe: '数据双向绑定' },
-  { id: 'MultipleModel', type: 'file', parentId: 'model', component: 'MultipleModel', name: '绑定多个model', describe: '一个组件中绑定多个v-model' },
-  { id: 'directive', type: 'folder', name: 'ref', describe: '' },
-  { id: 'SameRef', type: 'file', parentId: 'directive', component: 'SameRef', name: '使用相同的ref', describe: '一个组件中绑定多个v-model' }
+  { name: 'model数据双向绑定', key: 'model', isGroup: true },
+  { name: '数据双向绑定组件传递', key: 'MultipleModel' },
+  { name: 'ref', key: 'ref', isGroup: true },
+  { name: 'ref名称相同', key: 'SameRef' },
+  { name: 'createElement(h函数)', key: 'createElement', isGroup: true },
+  { name: '使用h传递插槽', key: 'CreateElementSlots' },
+  { name: '自定义指令', key: 'directive', isGroup: true }
+
 ]
