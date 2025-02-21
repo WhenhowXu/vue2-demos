@@ -112,7 +112,7 @@ const menusTree = [
       {
         path: '/antDemos/list',
         template: 'antDemos/index',
-        title: 'Ant Design Vue示例',
+        title: 'Antd 示例',
         icon: 'table',
         name: 'AntDemos',
         cache: true
