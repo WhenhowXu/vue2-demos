@@ -19,7 +19,6 @@ export default {
           dayGridPlugin, timeGridPlugin, interactionPlugin
         ],
         initialView: 'dayGridMonth',
-        // initialDate: '2022-01-01',
         additionalMonths: 2,
         startDate: new Date(2024, 11, 23),
         endDate: new Date(2025, 0, 22),

@@ -6,7 +6,7 @@
       enter-button
       @search="search"
     />
-    <ul>
+    <ul style="margin-top: 16px">
       <li v-for="(item, index) in dataSource" :key="index">
         <span v-highlight="highlightWords">{{ item.name }}</span>
         <a-divider type="vertical" />

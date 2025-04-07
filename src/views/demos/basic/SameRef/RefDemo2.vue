@@ -12,8 +12,6 @@ export default {
     ChildDemo
   },
   mounted() {
-    console.log(this.$refs.ref1)
-    console.log(this.$refs.ref2)
   }
 }
 </script>

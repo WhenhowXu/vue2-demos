@@ -1,9 +1,9 @@
 import Layout from '@/layouts'
-const lazyLoad = (template) => {
+const lazyLoad = template => {
   if (template === 'layout') {
     return Layout
   }
-  return (resolve) => require([`@/views/${template}.vue`], resolve)
+  return resolve => require([`@/views/${template}.vue`], resolve)
 }
 
 export const constantRoutes = [
@@ -70,14 +70,6 @@ const menusTree = [
         icon: 'user',
         name: 'VueBasicList',
         cache: true
-      },
-      {
-        path: '/vueBasic/detail',
-        template: 'basic/basicDetail',
-        title: '详情',
-        name: 'VueBasicDetail',
-        hideInMenu: true,
-        cache: true
       }
     ]
   },
@@ -105,24 +97,16 @@ const menusTree = [
     ]
   },
   {
-    path: '/antDemos',
+    path: '/ant',
     template: 'layout',
     title: 'Vue基础',
     children: [
       {
-        path: '/antDemos/list',
-        template: 'antDemos/index',
+        path: '/ant/list',
+        template: 'ant/index',
         title: 'Antd 示例',
         icon: 'table',
         name: 'AntDemos',
-        cache: true
-      },
-      {
-        path: '/antDemos/detail',
-        template: 'antDemos/detail',
-        title: '详情',
-        name: 'AntDemosDetail',
-        hideInMenu: true,
         cache: true
       }
     ]
@@ -136,34 +120,33 @@ const menusTree = [
  */
 
 export const generateAddRoutes = (menusTree, level = 1) => {
-  return menusTree.map(m => (
-    {
-      name: m.name,
-      path: m.path,
-      component: m.isExternal ? null : lazyLoad(m.template),
-      meta: { title: m.title, icon: m.icon },
-      children: m.children?.length ? generateAddRoutes(m.children, level + 1) : null
-    }
-  ))
+  return menusTree.map(m => ({
+    name: m.name,
+    path: m.path,
+    component: m.isExternal ? null : lazyLoad(m.template),
+    meta: { title: m.title, icon: m.icon },
+    children: m.children?.length ? generateAddRoutes(m.children, level + 1) : null
+  }))
 }
 
 export const ADD_ROUTES = generateAddRoutes(menusTree)
 
 // 生成侧标栏菜单
-const generateSideMenus = (menusTree) => {
-  return menusTree.filter(m => !m.hideInMenu && m.title).map(m => {
-    const obj = {
-      title: m.title,
-      path: m.path,
-      icon: m.icon,
-      children: m.children ? generateSideMenus(m.children) : null
-    }
-    if (obj.children?.length === 1) {
-      return obj.children[0]
-    }
-    return obj
-  })
+const generateSideMenus = menusTree => {
+  return menusTree
+    .filter(m => !m.hideInMenu && m.title)
+    .map(m => {
+      const obj = {
+        title: m.title,
+        path: m.path,
+        icon: m.icon,
+        children: m.children ? generateSideMenus(m.children) : null
+      }
+      if (obj.children?.length === 1) {
+        return obj.children[0]
+      }
+      return obj
+    })
 }
 export const SIDE_MENUS = generateSideMenus(menusTree)
-console.log('SIDE_MENUS', SIDE_MENUS)
 export const asyncRoutes = ADD_ROUTES

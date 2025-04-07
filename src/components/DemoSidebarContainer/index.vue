@@ -1,42 +1,51 @@
 <template>
   <div class="vd-page vd-sidebar-page">
     <div class="vd-sidebar-page_sidebar">
-      <ul class="demo-list">
-        <li
-          v-for="demo in demos"
-          :key="demo.key"
-          :class="{
-            'demo-list_item': true,
-            selected: demoKey === demo.key && !demo.isGroup,
-            grouped: demo.isGroup,
-            selectable: !demo.isGroup
-          }"
-          @click="switchDemo(demo)"
-        >
-          {{ demo.name }}
-        </li>
-      </ul>
+      <div v-for="(p, index) in demos" :key="index">
+        <div>
+          <h3>{{ p.name }}</h3>
+          <ul class="demo-list">
+            <li
+              v-for="demo in p.children || []"
+              :key="demo.key"
+              :class="{
+                'demo-list_item': true,
+                selected: demoKey === demo.key && !demo.isGroup,
+                grouped: demo.isGroup,
+                selectable: !demo.isGroup
+              }"
+              @click="switchDemo(demo)"
+            >
+              {{ demo.name }}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="vd-sidebar-page_main">
-      <slot />
+      <slot>
+        <component :is="dynamicComponent" />
+      </slot>
     </div>
   </div>
 </template>
 
 <script>
-import {} from '@/components/'
 export default {
+  name: 'DemoSidebarContainer',
   model: {
     prop: 'value',
     event: 'change'
   },
   props: {
+    rootPath: { type: String, default: 'basic' },
     demos: { type: Array, default: () => [] },
     value: { type: String, default: undefined }
   },
   data() {
     return {
-      demoKey: ''
+      demoKey: '',
+      dynamicComponent: null
     }
   },
   watch: {
@@ -45,15 +54,21 @@ export default {
     }
   },
   created() {
-    const demo = this.demos.find((item) => !item.isGroup)
-    this.switchDemo(demo)
+    this.switchDemo(this.demos?.[0]?.children?.[0])
   },
   methods: {
+    setLoadComponent(demoKey) {
+      this.dynamicComponent = resolve =>
+        require.ensure([], () =>
+          resolve(require(`@/views/demos/${this.rootPath}/${demoKey}/index.vue`))
+        )
+    },
     switchDemo(demo) {
-      if (demo.key === this.demoKey || demo.isGroup) {
+      if (!demo || demo.key === this.demoKey) {
         return
       }
       this.demoKey = demo.key
+      this.setLoadComponent(this.demoKey)
       this.$emit('change', demo.key, demo)
     }
   }
@@ -72,7 +87,7 @@ export default {
     &.selectable {
       cursor: pointer;
     }
-    &.grouped{
+    &.grouped {
       font-weight: bold;
     }
   }
@@ -81,7 +96,7 @@ export default {
 .fc {
   max-width: 1100px;
   margin: 0 auto;
-  }
+}
 
 .fc {
   max-width: 1100px;

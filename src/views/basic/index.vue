@@ -1,38 +1,39 @@
 <template>
-  <DemoSidebarContainer v-model="activeDemo" :demos="demos">
-    <component :is="activeDemo" />
-  </DemoSidebarContainer>
+  <DemoSidebarContainer :demos="demos" />
 </template>
 <script>
-import DemoSidebarContainer from '@/components/DemoSidebarContainer'
-import * as BasicDemos from './demos'
-import { demos } from './config'
-
 export default {
   name: 'BasicList',
-  components: { DemoSidebarContainer, ...BasicDemos },
   data() {
+    const demos = [
+      {
+        name: 'model数据双向绑定',
+        key: 'model',
+        children: [{ name: '数据双向绑定组件传递', key: 'MultipleModel' }]
+      },
+      {
+        name: 'ref',
+        key: 'ref',
+        children: [{ name: 'ref名称相同', key: 'SameRef' }]
+      },
+      {
+        name: 'createElement(h函数)',
+        key: 'createElement',
+        children: [{ name: '使用h传递插槽', key: 'CreateElementSlots' }]
+      },
+      {
+        name: '自定义指令',
+        key: 'directive',
+        children: [
+          { name: '关键字高亮', key: 'DirectiveHighLight' },
+          { name: '权限按钮', key: 'DirectivePermission' }
+        ]
+      }
+    ]
+
     return {
-      demos,
-      activeDemo: ''
+      demos
     }
   }
 }
 </script>
-<style lang="less" scoped>
-.basic-list-page {
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  .left-section {
-    width: 360px;
-    background-color: lightblue;
-    margin-right: 12px;
-  }
-  .content-section {
-    flex: 1;
-    background-color: #fff;
-    border-radius: 4px;
-  }
-}
-</style>

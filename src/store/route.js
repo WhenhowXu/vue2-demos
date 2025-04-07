@@ -1,4 +1,3 @@
-import { getMenus } from '@/api/router'
 import router from '@/router'
 export default {
   namespaced: true,
@@ -31,8 +30,7 @@ export default {
   },
   actions: {
     async getMenus({ commit }) {
-      const data = await getMenus()
-      console.log(data)
+      // const data = await getMenus()
     },
     switchCurrentPage(_, fullPath) {
       router.push(fullPath)

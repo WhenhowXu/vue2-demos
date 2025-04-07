@@ -17,6 +17,7 @@ import SlotDemo from './SlotDemo'
 import BaseParent from './BaseParent.vue'
 
 export default {
+  name: 'CreateElementSlots',
   components: {
     SlotDemo,
     BaseParent

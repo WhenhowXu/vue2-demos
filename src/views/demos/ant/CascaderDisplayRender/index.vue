@@ -1,5 +1,10 @@
 <template>
-  <a-cascader :options="options" change-on-select :display-render="displayRender" @change="onChange" />
+  <a-cascader
+    :options="options"
+    change-on-select
+    :display-render="displayRender"
+    @change="onChange"
+  />
 </template>
 <script>
 export default {
